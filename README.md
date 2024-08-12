@@ -26,6 +26,11 @@
 
 
 
+### 更新记录
+[ChangeLog](CHANGELOG.md)
+
+
+
 ### 目录详解
 
 ##### - [App] 应用类
