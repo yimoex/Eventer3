@@ -24,6 +24,7 @@ class Connection {
         'create_time' => 0
     ];
     public $status = networkStatus::STATUS_CONNECTING;
+    public $ssl = false;
     public $type;
     public $attr = [];
 
