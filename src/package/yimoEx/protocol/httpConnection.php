@@ -10,6 +10,8 @@ class HttpConnection extends TcpConnection {
 
     public $request;
 
+    public $protocol = 'tcp';
+
 	public $options = [
 		'ssl'  => [
 			'verify_peer'      => false,
@@ -21,13 +23,14 @@ class HttpConnection extends TcpConnection {
         $param = $this -> parser_addr($addr);
         $this -> port = $port = $param['port'];
         $type = $param['ssl'] === true ? 'ssl' : 'tcp';
+        if($type === 'ssl') $this -> protocol = 'ssl';
         $this -> addr = $type . '://' . $param['ip'] . ':' . $port;
         $this -> request = $http = new HttpRequest($param['addr'], $param['path'], $port);
         $this -> buffer = new Buffer('');
         $this -> onConnect = function($tcp) use ($http){
             $tcp -> send($http -> make());
         };
-        $this -> create_time = microtime(true);
+        $this -> times['create_time'] = microtime(true);
     }
 
     public function request(){
@@ -41,7 +44,7 @@ class HttpConnection extends TcpConnection {
     public function isDataEnd(){
         return $this -> buffer -> call(function($data){
             $k = substr($data, -5);
-            return $k == "0\r\n\r\n" || $k == 'html>';
+            return $k === "0\r\n\r\n" || $k === 'html>';
         });
     }
 

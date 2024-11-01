@@ -21,12 +21,6 @@ class HttpRequest {
         $this -> port = (int)$port;
     }
 
-    public function set($key, $value){
-        if(!isset($this -> $key)) return false;
-        $this -> $key = $value;
-        return true;
-    }
-
     public function setHeader($key, $value){
         $this -> header[$key] = $value;
         return true;
@@ -47,9 +41,13 @@ class HttpRequest {
             $this -> add($head, $key . ': ' . $value);
         }
         $this -> add($head, 'Host: ' . $this -> host . ':' . $this -> port);
-        $this -> add($head, '');
-        if($this -> type !== 'GET' && $this -> data != NULL){
+        
+        //数据体
+        if($this -> type === 'POST' && $this -> data != NULL){
+            $this -> add($head, 'Content-Length: ' .  strlen($this -> data));
+            $this -> add($head, '');
             $this -> add($head, $this -> data);
+        }else{
             $this -> add($head, '');
         }
         return $head;

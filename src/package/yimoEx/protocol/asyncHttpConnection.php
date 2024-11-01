@@ -8,7 +8,9 @@ class AsyncHttpConnection extends HttpConnection {
     public $id = NULL;
 
     public function connect() : bool {
-        if(!$this -> _connect(STREAM_CLIENT_ASYNC_CONNECT)) return false;
+        $type = STREAM_CLIENT_ASYNC_CONNECT;
+        if($this -> protocol === 'ssl') $type = STREAM_CLIENT_CONNECT;
+        if(!$this -> _connect($type)) return false;
         $this -> id = ConnectionPool::push($this);
         return true;
     }

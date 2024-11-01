@@ -8,6 +8,11 @@ class ConnectionPool {
     protected static $_connections = [];
     public static $connectionSize = 0;
 
+    /**
+     * 向连接池中送入连接类
+     * @param \Eventer\Libs\Network\Connection $connection 连接类
+     * @return string 在连接池中的ID
+     */
     public static function push(Connection $connection){
         $id = self::findId();
         $connection -> id = $id;
@@ -20,7 +25,6 @@ class ConnectionPool {
         foreach(self::$_connections as $connection){
             $index = $connection -> id;
 
-            
             if($connection -> status === networkStatus::STATUS_CONNECTING){
                 if($connection -> isTimeout()){
                     $connection -> event('Timeout', $connection);
@@ -44,8 +48,10 @@ class ConnectionPool {
                 continue;
             }
             if($connection -> buffer -> length() == 0) continue;
-            $connection -> event('Message', $connection, $connection -> response());
-            $connection -> buffer -> clear();
+            if($connection -> isDataEnd()){
+                $connection -> event('Message', $connection, $connection -> response());
+                $connection -> buffer -> clear();
+            }
         }
     }
 
@@ -53,7 +59,12 @@ class ConnectionPool {
         return uniqid();
     }
 
-    public static function remove($id) : bool {
+    /**
+     * 移除连接
+     * @param string $id 连接池中的ID
+     * @return bool
+     */
+    public static function remove(string $id) : bool {
         if(!isset(self::$_connections[$id])) return false;
         self::$connectionSize--;
         unset(self::$_connections[$id]);

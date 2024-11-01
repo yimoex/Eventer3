@@ -47,6 +47,12 @@ class Io {
         if(is_resource($this -> stream)) fclose($this -> stream);
     }
 
+    public function setAsync(){
+        return stream_set_blocking($this -> stream, true);
+    }
 
+    public function setSync(){
+        return stream_set_blocking($this -> stream, false);
+    }
 
 }

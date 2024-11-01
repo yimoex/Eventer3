@@ -3,7 +3,7 @@ namespace Eventer\Libs\Network;
 
 class AsyncTcpConnection extends Connection {
 
-    public function buildAddr($addr, $port){
+    public function buildAddr(string $addr, int $port){
         $protocol = $this -> ssl ? 'tcp' : 'ssl';
         $this -> addr = $protocol . '://' . $addr . ':' . $port;
         $this -> port = $port;

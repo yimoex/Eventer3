@@ -40,10 +40,11 @@ class Eventer {
     }
 
     /**
-     * Summary of run
-     * @return never
+     * 核心运行库
+     * @return void
      */
     public function run(){
+        if(empty($this -> _events)) return;
         while(1){
             ConnectionPool::run();
             foreach($this -> _events as $event){
@@ -55,7 +56,6 @@ class Eventer {
             }
             usleep(100);
         }
-
     }
 
 }
