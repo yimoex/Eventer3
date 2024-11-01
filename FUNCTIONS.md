@@ -65,7 +65,8 @@
 - call(callback) => 与buffer同理  [回调函数参数: (文件流stream)]
 - size() => 返回文件大小
 - close() => 关闭io
-
+- setAsync() => 设置为异步IO
+- setSync() => 设置为同步IO
 
 
 ### 网络库
@@ -110,3 +111,6 @@
 #### AsyncHttpConnection [继承HttpConnection]: 异步HTTP连接类
 
 - 无额外属性
+
+
+

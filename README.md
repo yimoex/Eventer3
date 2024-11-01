@@ -145,3 +145,12 @@ Listener::unlistenAll('userChecker'); //关闭监听(注: 如果使用unlisten�
 
 - 实际上就是一个内置了 **Buffer** 的包装类 (带锁/超时属性)
 - 这里就不过多介绍了,详见文档
+
+##### 5. AI模块 (扩展内容)
+```
+$c = Ai::create();
+$c -> send('你现在是一个C语言助手', '帮我写一个Hello world代码', function($msg){
+    echo $msg . "\n";
+});
+```
+
