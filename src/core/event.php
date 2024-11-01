@@ -19,6 +19,15 @@ class Event {
         return $func($this);
     }
 
+    public function setAttr($key, $value){
+        $this -> attr[$key] = $value;
+        return true;
+    }
+
+    public function getAttr($key, $default = NULL){
+        return $this -> attr[$key] ?? $default;
+    }
+
     public static function make($id, $callback, $timer = 1){
         return new Event($id, $callback, $timer);
     }

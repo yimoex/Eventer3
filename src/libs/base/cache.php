@@ -3,9 +3,9 @@ namespace Eventer\Libs\Base;
 
 class Cache {
 
-    protected $_nodes = [];
+    protected static $_nodes = [];
 
-    public static function create($id){
+    public static function create(string $id){
         $node = new \stdClass;
         $node -> id = $id;
         $node -> locked = false;
@@ -15,48 +15,48 @@ class Cache {
         return $node;
     }
 
-    public function set($id, $data) : bool {
+    public static function set(string $id, string $data) : bool {
         if(!isset(self::$_nodes[$id])) return false;
         $node = self::$_nodes[$id];
         $node -> data -> update($data);
         return true;
     }
 
-    public static function call($id, \Closure $callback){
+    public static function call(string $id, \Closure $callback){
         if(!isset(self::$_nodes[$id])) return false;
         $node = self::$_nodes[$id];
         if($node -> locked) return false;
         return $node -> data -> call($callback);
     }
 
-    public static function get($id){
+    public static function get(string $id){
         if(!isset(self::$_nodes[$id])) return false;
         $node = self::$_nodes[$id];
         return $node -> data;
     }
 
-    public static function lock($id) : bool {
+    public static function lock(string $id) : bool {
         if(!isset(self::$_nodes[$id])) return false;
         $node = self::$_nodes[$id];
         $node -> locked = true;
         return true;
     }
 
-    public static function unlock($id) : bool {
+    public static function unlock(string $id) : bool {
         if(!isset(self::$_nodes[$id])) return false;
         $node = self::$_nodes[$id];
         $node -> locked = false;
         return true;
     }
 
-    public function isTimeout($id) : bool {
+    public function isTimeout(string $id) : bool {
         if(!isset(self::$_nodes[$id])) return false;
         $node = self::$_nodes[$id];
         if($node -> timeout === 0) return false;
         return (int)(microtime(true) - $node -> update_time) > $node -> timeout;
     }
 
-    public function update($id) : bool {
+    public function update(string $id) : bool {
         if(!isset(self::$_nodes[$id])) return false;
         $node = self::$_nodes[$id];
         $node -> update_time = (int)microtime(true);

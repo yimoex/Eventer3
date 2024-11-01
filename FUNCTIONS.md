@@ -20,6 +20,8 @@
 
 #### Buffer库: 数据缓冲
 
+> 对数据的通用处理器
+
 - length()  => 返回buffer中数据的长度
 - update(string data) => 覆盖新的数据 [支持链式调用]
 - add(string data) => 在数据尾部增加新数据 [支持链式调用]
@@ -31,6 +33,8 @@
 
 
 #### Cache库: 内置的缓存控制机制
+
+> 对Buffer的封装,内置权限和超时机制
 
 - Cache::create(string id) => 创建一个带有ID的 缓存节点node,并存储于Cache类中
 - set(string id, string data) => 向id的node写入data
@@ -44,6 +48,8 @@
 
 
 #### Listener库: 事件响应机制
+
+> 以[事件发布<=>事件响应]的机制为应用解耦,提升内聚和扩展性
 
 - listen(string id, string event_id, callback, [int count = -1]) => 注册一个内部标识id的事件
 
@@ -59,6 +65,8 @@
 
 #### IO库: 基础文件控制器(本质是fopen等函数的封装)
 
+> 基础的文件管理器
+
 - (初始化) new Io(string filename, string mode) => 和fopen同理,但filename仅支持public文件夹下的文件
 - write(string data) => 向io中写入数据 [支持链式调用]
 - read(int size) => io中读入数据
@@ -72,6 +80,8 @@
 ### 网络库
 
 #### Connection: 基础连接类
+
+> 该类无法用于网络请求/数据处理
 
 - connect() => 启动连接
 
@@ -100,13 +110,11 @@
 ### HTTP网络库扩展(位于package/yimoEx/protocol)
 
 > 注: 在onMessage中,返回的数据不再是Buffer而是httpResponse类
->
 
 #### HttpConnection [继承TcpConnection]: HTTP连接类
 
 - request() => 返回 HTTP请求类
 - isDataEnd() => 判断数据包是否传输完毕
-
 
 #### AsyncHttpConnection [继承HttpConnection]: 异步HTTP连接类
 
