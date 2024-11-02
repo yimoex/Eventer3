@@ -1,6 +1,6 @@
 ### ChangeLog
 
-#### V1.2 [[#a6c7c6]](https://github.com/yimoex/Eventer3/commit/a6c7c64c6f41ba6f3381dc2689c04fcc5160ee6e)
+#### V1.2 (2024-11-2) [[#a6c7c6]](https://github.com/yimoex/Eventer3/commit/a6c7c64c6f41ba6f3381dc2689c04fcc5160ee6e)
 
 **[Re] 重构缓存组件 `Cache` (原Cache功能性过低,且与Buffer耦合过度)**
 
