@@ -1,5 +1,16 @@
 ### ChangeLog
 
+#### V1.2 [[#a6c7c6]](https://github.com/yimoex/Eventer3/commit/a6c7c64c6f41ba6f3381dc2689c04fcc5160ee6e)
+**[Re] 重构缓存组件 `Cache` (原Cache功能性过低,且与Buffer耦合过度)**
+**[Feature/Add] 新增 `Promise` 类: 对业务解耦,可用于 `Connection` 类的更优化处理(例如发送邮件)**
+[Feature/Add/Package - Base] 新增 `Timer` 类: 用于对运行时间的进一步控制
+[Fix] 修复了 `Listener` 类中会出现多个同ID的节点的问题
+[Fix] 修复了 `Listener` 类中的 `count` 属性不准确的问题
+[Feature] `Listener` 新增<data>属性以及<bindData>方法来绑定数据,<getListen>获取Listen对象
+[Feature] `Eventer` 现在支持<unregister>方法来卸载Event
+[Change] `Event` 注册不再需要ID (由<register>方法返回获取),并且触发事件第二个参数为 `Eventer`
+
+
 #### V1.11 (2024-11-1) [[#7561a8]](https://github.com/yimoex/Eventer3/commit/7561a8298ffe17a0af07e8f25702eeb5f26ef71f)
 [Feature] setAttr对Event的支持
 [Fix] 修复Cache的一些问题

@@ -4,14 +4,16 @@
 
 #### 核心库 - Event
 
-- Event::make(string id, callback, float timer) => 建立事件
+- Event::make(callback, float timer) => 建立事件
 
-- init(callback) => 可用于处理初始化等任务 [回调函数参数: (Event $event)]
+- init(callback) => 可用于处理初始化等任务 [回调函数参数: (Event event)]
 
 
 #### 核心库 - Eventer
 
-- register(Event $event) => 向核心中注册事件
+- register(Event $event) => 向核心中注册事件 (返回事件ID)
+
+- unregister(string id) => 向核心中卸载事件 (id由 <register> 方法获取)
 
 
 
@@ -32,18 +34,17 @@
 
 
 
-#### Cache库: 内置的缓存控制机制
+#### Cache库(Re): 内置的缓存控制机制
 
-> 对Buffer的封装,内置权限和超时机制
+> ~~对Buffer的封装,内置权限和超时机制~~
+>
+> 数据容器 (而Buffer仅能存取String)
 
-- Cache::create(string id) => 创建一个带有ID的 缓存节点node,并存储于Cache类中
-- set(string id, string data) => 向id的node写入data
-- call(string id, string data) => 与buffer同理
-- get(string id) => 与buffer同理
-- lock(string id) => 锁定缓存节点的数据
-- unlock(string id) => 解锁缓存节点的数据
-- isTimeout(string id) => 缓存节点是否超时
-- update(string id) => 更新缓存的时间(用于检测timeout)
+- Cache::create(string id) => 创建一个带有ID的 缓存节点,并存储于内存中
+- set(string id, mixed data) => 向id的节点写入数据
+- call(string id, callable caller) => 回调数据(返回值会覆盖缓存数据) [回调函数参数: (mixed data)]
+- get(string id) => 获取数据
+- lock(string id, bool enable) => 锁定/锁定缓存节点的数据
 
 
 
@@ -55,11 +56,23 @@
 
   并且响应event_id (规范: xxx.xxx.xxx)(支持通配符 *),响应次数count次(-1则为无限次)
 
+- getListen(string id) => 获取监听器对象 `Listen`
+
+- bindData(string id, mixed data) => 向监听器绑定数据
+
 - unlisten(string|array id) => 解除目标id的事件监听
-- unlistenAll(string|array id) => 解除所有目标id的事件监听(与listen区别是,可能会存在同一id的事件,该方法能全部解除同一id的监听)
+
 - unlistenByArray(array ids) => 使用数组进行批处理解除监听
+
 - setCounts(string id, int counts) => 为监听器id设置响应次数
+
 - emit(string id, data) => 触发名为id的事件(例: user.register),并附加data数据
+
+##### Listen对象属性(可能会用到的)
+ -  event_id(id): 触发事件ID(监听器ID)
+
+ -  data: 由 <bindData> 绑定的数据
+
 
 
 
