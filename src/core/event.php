@@ -9,8 +9,7 @@ class Event {
     public $lasttime = 0;
     public $attr = [];
 
-    public function __construct($id, $callback, $timer = 1){
-        $this -> id = $id;
+    public function __construct($callback, $timer = 1){
         $this -> callback = $callback;
         $this -> timer = $timer;
     }
@@ -28,8 +27,8 @@ class Event {
         return $this -> attr[$key] ?? $default;
     }
 
-    public static function make($id, $callback, $timer = 1){
-        return new Event($id, $callback, $timer);
+    public static function make($callback, $timer = 1){
+        return new Event($callback, $timer);
     }
 
 }

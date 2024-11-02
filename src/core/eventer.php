@@ -19,9 +19,7 @@ class Eventer {
         include_once ROOT . '/core/function.php';
 
         $this -> attr = $attr = new \stdClass;
-        $attr -> tps = 0;
         $attr -> counts = 0;
-        $attr -> task_counts = 0;
         $this -> findApp();
     }
 
@@ -34,8 +32,16 @@ class Eventer {
     }
 
     public function register(Event $ev){
-        $this -> _events[] = $ev;
+        $ev -> id = $id = 'eventer' . md5(spl_object_hash($ev));
+        $this -> _events[$id] = $ev;
         $this -> attr -> counts++;
+        return true;
+    }
+
+    public function unregister(string $id){
+        if(!isset($this -> _events[$id])) return false;
+        unset($this -> _events[$id]);
+	    $this -> attr -> counts--;
         return true;
     }
 
@@ -51,7 +57,7 @@ class Eventer {
                 $i = (int)microtime(true) - $event -> lasttime;
                 if($event -> timer > $i) continue;
                 $caller = $event -> callback;
-                $caller($event);
+                $caller($event, $this);
                 $event -> lasttime = (int)microtime(true);
             }
             usleep(100);
