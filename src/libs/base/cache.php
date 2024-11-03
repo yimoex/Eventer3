@@ -1,5 +1,5 @@
 <?php
-namespace Eventer\Libs;
+namespace Eventer\Libs\Base;
 
 class Cache {
 
