@@ -1,10 +1,10 @@
 ### ChangeLog
 
-#### V1.21 (2024-11-10) [#efefdcb](https://github.com/yimoex/Eventer3/commit/efefdcb6efdb9a81dfd09330d5fde16a96d21220)
+#### V1.21 (2024-11-10) [[#efefdcb]](https://github.com/yimoex/Eventer3/commit/efefdcb6efdb9a81dfd09330d5fde16a96d21220)
 
-[Feature] 新增<Container>类实现依赖注入
+[Feature] 新增 `Container` 类实现依赖注入
 
-[Feature/Package - YimoEx] 协议库新增<Proxy>类实现简易代理中间件
+[Feature/Package - YimoEx] 协议库新增 `Proxy` 类实现简易代理中间件
 
 #### V1.2 (2024-11-2) [[#a6c7c6]](https://github.com/yimoex/Eventer3/commit/a6c7c64c6f41ba6f3381dc2689c04fcc5160ee6e)
 
@@ -18,11 +18,11 @@
 
 [Fix] 修复了 `Listener` 类中的 `count` 属性不准确的问题
 
-[Feature] `Listener` 新增<data>属性以及<bindData>方法来绑定数据,<getListen>获取Listen对象
+[Feature] `Listener` 新增 `data` 属性以及 `bindData` 方法来绑定数据, `getListen` 获取Listen对象
 
-[Feature] `Eventer` 现在支持<unregister>方法来卸载Event
+[Feature] `Eventer` 现在支持 `unregister` 方法来卸载Event
 
-[Change] `Event` 注册不再需要ID (由<register>方法返回获取),并且触发事件第二个参数为 `Eventer`
+[Change] `Event` 注册不再需要ID (由 `register` 方法返回获取),并且触发事件第二个参数为 `Eventer`
 
 
 #### V1.11 (2024-11-1) [[#7561a8]](https://github.com/yimoex/Eventer3/commit/7561a8298ffe17a0af07e8f25702eeb5f26ef71f)
