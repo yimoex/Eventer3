@@ -1,5 +1,11 @@
 ### ChangeLog
 
+#### V1.21 (2024-11-10) [#efefdcb](https://github.com/yimoex/Eventer3/commit/efefdcb6efdb9a81dfd09330d5fde16a96d21220)
+
+[Feature] 新增<Container>类实现依赖注入
+
+[Feature/Package - YimoEx] 协议库新增<Proxy>类实现简易代理中间件
+
 #### V1.2 (2024-11-2) [[#a6c7c6]](https://github.com/yimoex/Eventer3/commit/a6c7c64c6f41ba6f3381dc2689c04fcc5160ee6e)
 
 **[Re] 重构缓存组件 `Cache` (原Cache功能性过低,且与Buffer耦合过度)**
